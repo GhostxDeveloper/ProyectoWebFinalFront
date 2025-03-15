@@ -1,0 +1,15 @@
+.title-content {
+    text-align: center;
+    font-weight: lighter;
+    color: var(--primary-color);
+    font-size: 36px;
+    margin-top: 20px;
+    border: #000000;
+}
+
+.home-container {
+    min-height: 100%; /* Esto asegura que el contenedor tenga al menos el 100% de la altura de la ventana */
+    overflow-y: auto;
+    background-color: #ffffff;
+  }
+  

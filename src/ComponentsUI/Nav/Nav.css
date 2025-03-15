@@ -1,0 +1,160 @@
+.layout {
+    width: 100%;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background: linear-gradient(to bottom, #A3CADB, #D1E9E2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    height: 70px;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-container a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  
+  .logo {
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .title-logo {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .search-container {
+    flex: 1;
+    margin: 0 20px;
+    max-width: 500px;
+    padding-top: 10px; /* Añadido para bajar un poco el buscador */
+  }
+  
+  .search-input {
+    width: 100%;
+  }
+  
+  /* Estilo para los enlaces de navegación */
+  .nav-links {
+    display: flex;
+  }
+  
+  .nav-links a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 12px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  .nav-links a:hover {
+    color: #1890ff;
+  }
+  
+  .icon {
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+  
+  .desktop-menu {
+    margin-left: 20px;
+  }
+  
+  .menu-button {
+    display: none;
+  }
+  
+  .logout-button {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+  }
+  
+  .logout-icon {
+    font-size: 22px;
+  }
+  
+  .logout-button:hover {
+    color: #ff4d4f;
+  }
+  
+  /* Estilos para el menú móvil */
+  .mobile-drawer .ant-drawer-body {
+    padding: 0;
+  }
+  
+  .mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+  }
+  
+  .mobile-nav-links a {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .mobile-nav-links a .icon {
+    margin-right: 10px;
+    margin-bottom: 0;
+  }
+  
+  .drawer-title {
+    display: flex;
+    align-items: center;
+  }
+  
+  .drawer-logo {
+    height: 30px;
+    margin-right: 10px;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 992px) {
+    .desktop-menu {
+      display: none;
+    }
+  
+    .menu-button {
+      display: block;
+    }
+  
+    .search-container {
+      max-width: 300px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .search-container {
+      max-width: 200px;
+    }
+    
+    .title-logo {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .search-container {
+      display: none;
+    }
+  }

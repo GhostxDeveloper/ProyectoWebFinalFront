@@ -1,0 +1,269 @@
+.recipes-container {
+  margin: 0 auto;;
+}
+
+.recipes-header {
+  margin-bottom: 32px;
+  text-align: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.recipes-content {
+  margin-bottom: 80px; /* Espacio para el botón flotante */
+}
+
+/* Estilos modernos para las tarjetas de recetas */
+.recipe-card-modern {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  height: 100%;
+  border: none;
+}
+
+.recipe-card-modern:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.recipe-image-modern {
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+
+.recipe-image-modern img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.recipe-image-modern:hover img {
+  transform: scale(1.05);
+}
+
+.recipe-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.recipe-image-modern:hover .recipe-image-overlay {
+  opacity: 1;
+}
+
+.view-details-btn {
+  color: white !important;
+  font-size: 24px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recipe-card-content {
+  padding: 8px 4px;
+}
+
+.recipe-title {
+  margin-bottom: 8px !important;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recipe-title:hover {
+  color: #1890ff;
+}
+
+.recipe-description {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 12px !important;
+}
+
+.recipe-time {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 12px;
+}
+
+.recipe-macro-preview {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.favorite-active {
+  color: #ff4d4f;
+}
+
+/* Estilos para el modal de detalles */
+.recipe-detail-content {
+  padding: 16px 0;
+}
+
+.recipe-detail-image {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.recipe-detail-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.recipe-detail-description {
+  font-size: 16px;
+  margin-bottom: 24px !important;
+  line-height: 1.6;
+}
+
+.recipe-detail-preparation {
+  margin-bottom: 24px;
+}
+
+/* Estilos para información nutricional */
+.nutrition-info {
+  padding: 8px 0;
+}
+
+.nutrition-card {
+  padding: 16px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.protein-icon, .carb-icon, .fat-icon {
+  color: white;
+  font-weight: bold;
+}
+
+.protein-icon {
+  background-color: #1890ff;
+}
+
+.carb-icon {
+  background-color: #52c41a;
+}
+
+.fat-icon {
+  background-color: #fa8c16;
+}
+
+.protein {
+  background-color: #e6f7ff;
+}
+
+.carbs {
+  background-color: #f6ffed;
+}
+
+.fats {
+  background-color: #fff7e6;
+}
+
+.calories {
+  background-color: #fff2e8;
+}
+
+.statistic {
+  text-align: center;
+}
+
+.statistic-title {
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.statistic-content {
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.statistic-suffix {
+  font-size: 16px;
+  font-weight: normal;
+  margin-left: 4px;
+}
+
+/* Estilos para los ingredientes */
+.ingredients-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.ingredient-tag {
+  padding: 6px 10px;
+  font-size: 14px;
+  margin-right: 0;
+}
+
+/* Botón flotante para añadir recetas */
+.floating-button {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  z-index: 100;
+}
+
+.modal-title {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+/* Estilos responsivos */
+@media (max-width: 576px) {
+  .recipes-container {
+    padding: 16px;
+  }
+  
+  .floating-button {
+    bottom: 16px;
+    right: 16px;
+  }
+  
+  .recipe-detail-image {
+    height: 200px;
+  }
+}

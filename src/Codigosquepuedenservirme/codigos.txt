@@ -1,0 +1,782 @@
+import React, { useState, useEffect } from 'react';
+import { 
+  Layout, 
+  Card, 
+  Avatar, 
+  Typography, 
+  Divider, 
+  Row, 
+  Col, 
+  Tabs, 
+  Statistic, 
+  Button, 
+  List, 
+  Tag,
+  Rate,
+  Progress,
+  Badge
+} from 'antd';
+import { 
+  UserOutlined, 
+  EditOutlined, 
+  MailOutlined, 
+  PhoneOutlined, 
+  EnvironmentOutlined,
+  HeartOutlined,
+  FireOutlined,
+  ClockCircleOutlined,
+  StarOutlined,
+  TeamOutlined,
+  InstagramOutlined,
+  YoutubeOutlined,
+  BookOutlined
+} from '@ant-design/icons';
+import NavSuperior from '../../ComponentsUI/Nav/NavSuperior';
+
+const { Header, Content } = Layout;
+const { Title, Text, Paragraph } = Typography;
+const { TabPane } = Tabs;
+
+const Profile = () => {
+  const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState({
+    name: 'Lucía Martínez',
+    role: 'Chef de Cocina Saludable',
+    avatar: 'https://i.pravatar.cc/150?img=5',
+    email: 'lucia@cocinaconvida.com',
+    phone: '+34 612 345 678',
+    location: 'Barcelona, España',
+    bio: 'Chef especializada en nutrición y cocina saludable con más de 8 años de experiencia. Certificada en nutrición deportiva y cocina vegetariana. Mi misión es hacer que la comida saludable sea deliciosa y accesible para todos.',
+    specialties: ['Cocina vegetariana', 'Keto', 'Sin gluten', 'Baja en carbohidratos', 'Vegana', 'Mediterránea', 'Fitness'],
+    education: [
+      { institution: 'Escuela de Hostelería de Barcelona', degree: 'Diploma en Artes Culinarias', year: '2015' },
+      { institution: 'Instituto de Nutrición de Madrid', degree: 'Certificación en Nutrición Deportiva', year: '2017' }
+    ],
+    experience: [
+      { company: 'Revista Cocina Saludable', position: 'Columnista de recetas', period: '2021 - Presente' },
+      { company: 'Restaurante Verde', position: 'Chef principal', period: '2018 - 2021' },
+      { company: 'Canal Cocina TV', position: 'Asistente de chef', period: '2016 - 2018' }
+    ],
+    recipeCategories: [
+      { name: 'Desayunos', count: 32 },
+      { name: 'Comidas', count: 45 },
+      { name: 'Cenas', count: 28 },
+      { name: 'Snacks', count: 19 },
+      { name: 'Postres', count: 24 }
+    ],
+    topRecipes: [
+      { 
+        name: 'Bowl de açaí con granola casera', 
+        category: 'Desayunos',
+        difficulty: 'Fácil',
+        time: '15 min',
+        calories: 320,
+        rating: 4.8,
+        likes: 1243,
+        image: 'https://i.pravatar.cc/150?img=12'
+      },
+      { 
+        name: 'Ensalada de quinoa y aguacate', 
+        category: 'Comidas',
+        difficulty: 'Media',
+        time: '25 min',
+        calories: 420,
+        rating: 4.9,
+        likes: 1589,
+        image: 'https://i.pravatar.cc/150?img=13'
+      },
+      { 
+        name: 'Salmón al horno con verduras', 
+        category: 'Cenas',
+        difficulty: 'Media',
+        time: '35 min',
+        calories: 450,
+        rating: 4.7,
+        likes: 1122,
+        image: 'https://i.pravatar.cc/150?img=14'
+      }
+    ],
+    stats: {
+      recipes: 148,
+      followers: 56200,
+      following: 325,
+      likes: 238450
+    },
+    socialMedia: {
+      instagram: '@luciacocinasaludable',
+      youtube: 'LuciaCocinaSaludable',
+      website: 'www.cocinaconvida.com'
+    }
+  });
+
+  useEffect(() => {
+    // Simular carga de datos
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
+
+  return (
+    <Layout style={{ minHeight: '100vh', background: '#f0f2f5' }}>
+      <NavSuperior />
+      <Content style={{ padding: '0 50px', marginTop: 20 }}>
+        <Row gutter={[24, 24]}>
+          {/* Columna izquierda - Información principal */}
+          <Col xs={24} md={8}>
+            <Card loading={loading} bordered={false} style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.09)' }}>
+              <div style={{ textAlign: 'center', marginBottom: 20 }}>
+                <Badge count={<Tag color="green">PRO</Tag>} offset={[-5, 5]}>
+                  <Avatar 
+                    size={120} 
+                    src={userData.avatar} 
+                    icon={<UserOutlined />} 
+                    style={{ border: '4px solid #52c41a' }}
+                  />
+                </Badge>
+                <Title level={3} style={{ marginTop: 16, marginBottom: 4 }}>{userData.name}</Title>
+                <Text type="secondary">{userData.role}</Text>
+                <div style={{ marginTop: 16 }}>
+                  <Button type="primary" icon={<EditOutlined />} style={{ marginRight: 8, backgroundColor: '#52c41a', borderColor: '#52c41a' }}>Editar Perfil</Button>
+                </div>
+              </div>
+              
+              <Divider />
+              
+              <div>
+                <p><MailOutlined style={{ marginRight: 8 }} /> {userData.email}</p>
+                <p><PhoneOutlined style={{ marginRight: 8 }} /> {userData.phone}</p>
+                <p><EnvironmentOutlined style={{ marginRight: 8 }} /> {userData.location}</p>
+                <p><InstagramOutlined style={{ marginRight: 8 }} /> {userData.socialMedia.instagram}</p>
+                <p><YoutubeOutlined style={{ marginRight: 8 }} /> {userData.socialMedia.youtube}</p>
+              </div>
+              
+              <Divider />
+              
+              <Title level={4}>Especialidades</Title>
+              <div>
+                {userData.specialties.map(specialty => (
+                  <Tag color="green" key={specialty} style={{ margin: '4px' }}>{specialty}</Tag>
+                ))}
+              </div>
+              
+              <Divider />
+              
+              <Title level={4}>Estadísticas</Title>
+              <Row gutter={[16, 16]}>
+                <Col span={12}>
+                  <Statistic title="Recetas" value={userData.stats.recipes} prefix={<BookOutlined style={{ color: '#52c41a' }} />} />
+                </Col>
+                <Col span={12}>
+                  <Statistic title="Seguidores" value={userData.stats.followers} prefix={<TeamOutlined style={{ color: '#52c41a' }} />} />
+                </Col>
+                <Col span={12}>
+                  <Statistic title="Siguiendo" value={userData.stats.following} prefix={<UserOutlined style={{ color: '#52c41a' }} />} />
+                </Col>
+                <Col span={12}>
+                  <Statistic title="Likes" value={userData.stats.likes} prefix={<HeartOutlined style={{ color: '#52c41a' }} />} />
+                </Col>
+              </Row>
+            </Card>
+          </Col>
+          
+          {/* Columna derecha - Pestañas con información adicional */}
+          <Col xs={24} md={16}>
+            <Card loading={loading} bordered={false} style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.09)' }}>
+              <Tabs defaultActiveKey="about">
+                <TabPane tab="Sobre mí" key="about">
+                  <Title level={4}>Biografía</Title>
+                  <Paragraph>{userData.bio}</Paragraph>
+                  
+                  <Title level={4}>Formación</Title>
+                  <List
+                    itemLayout="horizontal"
+                    dataSource={userData.education}
+                    renderItem={(edu, index) => (
+                      <List.Item>
+                        <List.Item.Meta
+                          avatar={<Avatar style={{ backgroundColor: '#52c41a' }}>{index + 1}</Avatar>}
+                          title={<Text strong>{edu.institution}</Text>}
+                          description={
+                            <>
+                              <div>{edu.degree}</div>
+                              <div><Text type="secondary">{edu.year}</Text></div>
+                            </>
+                          }
+                        />
+                      </List.Item>
+                    )}
+                  />
+                  
+                  <Title level={4} style={{ marginTop: 24 }}>Experiencia</Title>
+                  <List
+                    itemLayout="horizontal"
+                    dataSource={userData.experience}
+                    renderItem={(item, index) => (
+                      <List.Item>
+                        <List.Item.Meta
+                          avatar={<Avatar style={{ backgroundColor: '#52c41a' }}>{index + 1}</Avatar>}
+                          title={<Text strong>{item.position} en {item.company}</Text>}
+                          description={item.period}
+                        />
+                      </List.Item>
+                    )}
+                  />
+                </TabPane>
+                
+                <TabPane tab="Recetas" key="recipes">
+                  <Row gutter={[16, 16]}>
+                    <Col span={24}>
+                      <Title level={4}>Categorías de recetas</Title>
+                      <Row gutter={[16, 16]}>
+                        {userData.recipeCategories.map(category => (
+                          <Col xs={12} sm={8} md={6} key={category.name}>
+                            <Card bordered={false} style={{ textAlign: 'center', borderRadius: '8px' }}>
+                              <Statistic 
+                                title={category.name} 
+                                value={category.count} 
+                                valueStyle={{ color: '#52c41a' }}
+                              />
+                            </Card>
+                          </Col>
+                        ))}
+                      </Row>
+                    </Col>
+                    
+                    <Col span={24} style={{ marginTop: 16 }}>
+                      <Title level={4}>Recetas más populares</Title>
+                      <List
+                        itemLayout="vertical"
+                        dataSource={userData.topRecipes}
+                        renderItem={(recipe) => (
+                          <Card 
+                            hoverable 
+                            style={{ marginBottom: 16, borderRadius: '8px' }}
+                            actions={[
+                              <span><StarOutlined style={{ color: '#faad14' }} /> {recipe.rating}</span>,
+                              <span><HeartOutlined style={{ color: '#f5222d' }} /> {recipe.likes}</span>,
+                              <span><FireOutlined style={{ color: '#fa541c' }} /> {recipe.calories} cal</span>,
+                              <span><ClockCircleOutlined style={{ color: '#1890ff' }} /> {recipe.time}</span>
+                            ]}
+                          >
+                            <List.Item.Meta
+                              avatar={<Avatar size={64} src={recipe.image} />}
+                              title={<Text strong style={{ fontSize: '16px' }}>{recipe.name}</Text>}
+                              description={
+                                <>
+                                  <Tag color="green">{recipe.category}</Tag>
+                                  <Tag color={recipe.difficulty === 'Fácil' ? 'blue' : recipe.difficulty === 'Media' ? 'orange' : 'red'}>
+                                    {recipe.difficulty}
+                                  </Tag>
+                                  <div style={{ marginTop: 8 }}>
+                                    <Rate disabled defaultValue={recipe.rating} style={{ fontSize: '14px' }} />
+                                  </div>
+                                </>
+                              }
+                            />
+                          </Card>
+                        )}
+                      />
+                    </Col>
+                  </Row>
+                </TabPane>
+                
+                <TabPane tab="Estadísticas" key="stats">
+                  <Row gutter={[24, 24]}>
+                    <Col xs={24} sm={12}>
+                      <Card bordered={false} style={{ borderRadius: '8px' }}>
+                        <Title level={4}>Recetas por categoría</Title>
+                        {userData.recipeCategories.map(category => (
+                          <div key={category.name} style={{ marginBottom: 12 }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                              <Text>{category.name}</Text>
+                              <Text>{category.count}</Text>
+                            </div>
+                            <Progress 
+                              percent={Math.round((category.count / userData.stats.recipes) * 100)} 
+                              showInfo={false} 
+                              strokeColor="#52c41a" 
+                            />
+                          </div>
+                        ))}
+                      </Card>
+                    </Col>
+                    <Col xs={24} sm={12}>
+                      <Card bordered={false} style={{ borderRadius: '8px' }}>
+                        <Title level={4}>Crecimiento de seguidores</Title>
+                        <div style={{ textAlign: 'center', padding: '20px 0' }}>
+                          <Progress 
+                            type="dashboard" 
+                            percent={85} 
+                            strokeColor="#52c41a" 
+                            format={() => '+25%'}
+                          />
+                          <div style={{ marginTop: 16 }}>
+                            <Text>Este mes has ganado</Text>
+                            <div>
+                              <Text strong style={{ fontSize: '24px', color: '#52c41a' }}>+8,453</Text>
+                              <Text> seguidores</Text>
+                            </div>
+                          </div>
+                        </div>
+                      </Card>
+                    </Col>
+                    <Col span={24}>
+                      <Card bordered={false} style={{ borderRadius: '8px' }}>
+                        <Title level={4}>Recetas más valoradas</Title>
+                        <List
+                          grid={{ gutter: 16, xs: 1, sm: 2, md: 3 }}
+                          dataSource={userData.topRecipes}
+                          renderItem={(recipe) => (
+                            <List.Item>
+                              <Card bordered={false} style={{ textAlign: 'center' }}>
+                                <div style={{ marginBottom: 8 }}>
+                                  <Avatar size={64} src={recipe.image} />
+                                </div>
+                                <Text strong>{recipe.name}</Text>
+                                <div style={{ margin: '8px 0' }}>
+                                <Rate disabled defaultValue={recipe.rating} style={{ fontSize: '14px' }} />
+                                </div>
+                                <div>
+                                  <Tag color="orange">{recipe.likes} likes</Tag>
+                                </div>
+                              </Card>
+                            </List.Item>
+                          )}
+                        />
+                      </Card>
+                    </Col>
+                  </Row>
+                </TabPane>
+                
+                <TabPane tab="Galería" key="gallery">
+                  <Row gutter={[16, 16]}>
+                    {Array(9).fill().map((_, index) => (
+                      <Col xs={24} sm={12} md={8} key={index}>
+                        <Card
+                          hoverable
+                          cover={<img alt="receta" src={`https://i.pravatar.cc/300?img=${20 + index}`} />}
+                          style={{ borderRadius: '8px' }}
+                        >
+                          <Card.Meta 
+                            title={`Receta saludable ${index + 1}`} 
+                            description={
+                              <div>
+                                <div style={{ marginBottom: 8 }}>
+                                  <Tag color="green">Saludable</Tag>
+                                  <Tag color="blue">Rápida</Tag>
+                                </div>
+                                <div>
+                                  <HeartOutlined style={{ color: '#f5222d', marginRight: 4 }} /> 
+                                  {Math.floor(Math.random() * 900) + 100}
+                                </div>
+                              </div>
+                            } 
+                          />
+                        </Card>
+                      </Col>
+                    ))}
+                  </Row>
+                </TabPane>
+                
+                <TabPane tab="Nutrición" key="nutrition">
+                  <Row gutter={[24, 24]}>
+                    <Col xs={24} md={12}>
+                      <Card bordered={false} style={{ borderRadius: '8px' }}>
+                        <Title level={4}>Enfoque nutricional</Title>
+                        <Paragraph>
+                          Como chef especializada en nutrición, todas mis recetas están diseñadas para proporcionar un equilibrio óptimo
+                          de macronutrientes y micronutrientes, asegurando que cada plato sea nutritivo además de delicioso.
+                        </Paragraph>
+                        
+                        <div style={{ marginTop: 16 }}>
+                          <Title level={5}>Distribución típica de macronutrientes</Title>
+                          <div style={{ marginBottom: 12 }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                              <Text>Proteínas</Text>
+                              <Text>30%</Text>
+                            </div>
+                            <Progress percent={30} showInfo={false} strokeColor="#1890ff" />
+                          </div>
+                          <div style={{ marginBottom: 12 }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                              <Text>Grasas saludables</Text>
+                              <Text>25%</Text>
+                            </div>
+                            <Progress percent={25} showInfo={false} strokeColor="#faad14" />
+                          </div>
+                          <div style={{ marginBottom: 12 }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                              <Text>Carbohidratos complejos</Text>
+                              <Text>45%</Text>
+                            </div>
+                            <Progress percent={45} showInfo={false} strokeColor="#52c41a" />
+                          </div>
+                        </div>
+                      </Card>
+                    </Col>
+                    
+                    <Col xs={24} md={12}>
+                      <Card bordered={false} style={{ borderRadius: '8px' }}>
+                        <Title level={4}>Principios de salud</Title>
+                        <List
+                          itemLayout="horizontal"
+                          dataSource={[
+                            'Ingredientes naturales y de temporada',
+                            'Métodos de cocción saludables',
+                            'Balance nutricional en cada plato',
+                            'Adaptación a diferentes necesidades dietéticas',
+                            'Porciones controladas',
+                            'Sabor sin comprometer la salud'
+                          ]}
+                          renderItem={(item, index) => (
+                            <List.Item>
+                              <List.Item.Meta
+                                avatar={<Avatar style={{ backgroundColor: '#52c41a' }}>{index + 1}</Avatar>}
+                                title={item}
+                              />
+                            </List.Item>
+                          )}
+                        />
+                      </Card>
+                    </Col>
+                    
+                    <Col span={24}>
+                      <Card bordered={false} style={{ borderRadius: '8px' }}>
+                        <Title level={4}>Certificaciones y estudios</Title>
+                        <Row gutter={[16, 16]}>
+                          <Col xs={24} sm={8}>
+                            <Card style={{ textAlign: 'center', borderRadius: '8px' }}>
+                              <BookOutlined style={{ fontSize: '36px', color: '#52c41a', marginBottom: 8 }} />
+                              <Title level={5}>Nutrición Deportiva</Title>
+                              <Text>Certificada por el Instituto Internacional de Nutrición Deportiva</Text>
+                            </Card>
+                          </Col>
+                          <Col xs={24} sm={8}>
+                            <Card style={{ textAlign: 'center', borderRadius: '8px' }}>
+                              <BookOutlined style={{ fontSize: '36px', color: '#52c41a', marginBottom: 8 }} />
+                              <Title level={5}>Dietas Vegetarianas</Title>
+                              <Text>Especialización en Nutrición Basada en Plantas</Text>
+                            </Card>
+                          </Col>
+                          <Col xs={24} sm={8}>
+                            <Card style={{ textAlign: 'center', borderRadius: '8px' }}>
+                              <BookOutlined style={{ fontSize: '36px', color: '#52c41a', marginBottom: 8 }} />
+                              <Title level={5}>Cocina Mediterránea</Title>
+                              <Text>Formación en Escuela de Hostelería de Barcelona</Text>
+                            </Card>
+                          </Col>
+                        </Row>
+                      </Card>
+                    </Col>
+                  </Row>
+                </TabPane>
+                
+                <TabPane tab="Contacto" key="contact">
+                  <Row gutter={[24, 24]}>
+                    <Col xs={24} md={12}>
+                      <Card bordered={false} style={{ borderRadius: '8px' }}>
+                        <Title level={4}>Información de contacto</Title>
+                        <div style={{ marginTop: 16 }}>
+                          <p style={{ fontSize: '16px' }}><MailOutlined style={{ marginRight: 8, color: '#52c41a' }} /> {userData.email}</p>
+                          <p style={{ fontSize: '16px' }}><PhoneOutlined style={{ marginRight: 8, color: '#52c41a' }} /> {userData.phone}</p>
+                          <p style={{ fontSize: '16px' }}><EnvironmentOutlined style={{ marginRight: 8, color: '#52c41a' }} /> {userData.location}</p>
+                        </div>
+                        
+                        <Title level={4} style={{ marginTop: 24 }}>Redes sociales</Title>
+                        <div style={{ marginTop: 16 }}>
+                          <p style={{ fontSize: '16px' }}>
+                            <InstagramOutlined style={{ marginRight: 8, color: '#e1306c' }} /> 
+                            {userData.socialMedia.instagram}
+                          </p>
+                          <p style={{ fontSize: '16px' }}>
+                            <YoutubeOutlined style={{ marginRight: 8, color: '#ff0000' }} /> 
+                            {userData.socialMedia.youtube}
+                          </p>
+                          <p style={{ fontSize: '16px' }}>
+                            <svg viewBox="0 0 1024 1024" width="1em" height="1em" fill="currentColor" style={{ marginRight: 8, color: '#52c41a' }}>
+                              <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z" />
+                              <path d="M719.4 499.1l-296.1-215A15.9 15.9 0 0 0 398 297a16 16 0 0 0-16 16v430a16 16 0 0 0 16 16 15.9 15.9 0 0 0 9.6-3.3l296.1-215a16.1 16.1 0 0 0 2.9-22.5 16 16 0 0 0-7.2-5.7z" />
+                            </svg>
+                            {userData.socialMedia.website}
+                          </p>
+                        </div>
+                        
+                        <div style={{ marginTop: 24 }}>
+                          <Button type="primary" icon={<MailOutlined />} style={{ backgroundColor: '#52c41a', borderColor: '#52c41a', width: '100%' }}>
+                            Enviar mensaje
+                          </Button>
+                        </div>
+                      </Card>
+                    </Col>
+                    
+                    <Col xs={24} md={12}>
+                      <Card bordered={false} style={{ borderRadius: '8px' }}>
+                        <Title level={4}>Colaboraciones y servicios</Title>
+                        <List
+                          itemLayout="horizontal"
+                          dataSource={[
+                            'Creación de recetas para marcas',
+                            'Desarrollo de menús saludables',
+                            'Consultoría nutricional',
+                            'Talleres y cursos online',
+                            'Eventos y showcookings'
+                          ]}
+                          renderItem={(item) => (
+                            <List.Item>
+                              <List.Item.Meta
+                                avatar={<StarOutlined style={{ color: '#52c41a', fontSize: '20px' }} />}
+                                title={item}
+                              />
+                            </List.Item>
+                          )}
+                        />
+                        
+                        <Button 
+                          type="default" 
+                          style={{ marginTop: 24, width: '100%', borderColor: '#52c41a', color: '#52c41a' }}
+                        >
+                          Solicitar colaboración
+                        </Button>
+                      </Card>
+                    </Col>
+                  </Row>
+                </TabPane>
+              </Tabs>
+            </Card>
+          </Col>
+        </Row>
+      </Content>
+    </Layout>
+  );
+};
+
+export default Profile;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React, { useState, useEffect } from 'react';
+import { 
+  Layout, 
+  Card, 
+  Avatar, 
+  Typography, 
+  Divider, 
+  Row, 
+  Col, 
+  Tabs, 
+  Statistic, 
+  Button, 
+  Tag,
+  Badge
+} from 'antd';
+import { 
+  UserOutlined, 
+  EditOutlined, 
+  MailOutlined, 
+  PhoneOutlined, 
+  EnvironmentOutlined,
+  HeartOutlined,
+  InstagramOutlined,
+  YoutubeOutlined,
+  BookOutlined
+} from '@ant-design/icons';
+import NavSuperior from '../../ComponentsUI/Nav/NavSuperior';
+import { getRecipes } from '../../api/recipes'; // Ajusta la ruta según tu proyecto
+
+const { Content } = Layout;
+const { Title, Text } = Typography;
+const { TabPane } = Tabs;
+
+const Profile = () => {
+  const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState({
+    name: 'Lucía Martínez',
+    role: 'Chef de Cocina Saludable',
+    avatar: 'https://i.pravatar.cc/150?img=5',
+    email: 'lucia@cocinaconvida.com',
+    phone: '+34 612 345 678',
+    location: 'Barcelona, España',
+    stats: {
+      recipes: 148,
+      likes: 238450
+    },
+    socialMedia: {
+      instagram: '@luciacocinasaludable',
+      youtube: 'LuciaCocinaSaludable',
+      website: 'www.cocinaconvida.com'
+    }
+  });
+  const [recipes, setRecipes] = useState([]);
+
+  // Obtener usuario de localStorage y cargar recetas
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    console.log('Usuario almacenado:', storedUser);
+    if (storedUser && storedUser !== 'undefined') {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        fetchRecipes(parsedUser.id);
+      } catch (error) {
+        console.error('Error al parsear los datos del usuario:', error);
+      }
+    } else {
+      setLoading(false); // Detener el loading si no hay usuario
+    }
+  }, []);
+
+  const fetchRecipes = async (userId) => {
+    try {
+      setLoading(true);
+      const data = await getRecipes(userId);
+      setRecipes(data);
+    } catch (error) {
+      console.error('Error al obtener las recetas:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <Layout style={{ minHeight: '100vh', background: '#f0f2f5' }}>
+      <NavSuperior />
+      <Content style={{ padding: '0 50px', marginTop: 20 }}>
+        <Row gutter={[24, 24]}>
+          {/* Columna izquierda - Información principal */}
+          <Col xs={24} md={8}>
+            <Card loading={loading} bordered={false} style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.09)' }}>
+              <div style={{ textAlign: 'center', marginBottom: 20 }}>
+                <Badge count={<Tag color="green">PRO</Tag>} offset={[-5, 5]}>
+                  <Avatar 
+                    size={120} 
+                    src={userData.avatar} 
+                    icon={<UserOutlined />} 
+                    style={{ border: '4px solid #52c41a' }}
+                  />
+                </Badge>
+                <Title level={3} style={{ marginTop: 16, marginBottom: 4 }}>{userData.name}</Title>
+                <Text type="secondary">{userData.role}</Text>
+                <div style={{ marginTop: 16 }}>
+                  <Button type="primary" icon={<EditOutlined />} style={{ marginRight: 8, backgroundColor: '#52c41a', borderColor: '#52c41a' }}>Editar Perfil</Button>
+                </div>
+              </div>
+              
+              <Divider />
+              
+              <div>
+                <p><MailOutlined style={{ marginRight: 8 }} /> {userData.email}</p>
+                <p><PhoneOutlined style={{ marginRight: 8 }} /> {userData.phone}</p>
+                <p><EnvironmentOutlined style={{ marginRight: 8 }} /> {userData.location}</p>
+                <p><InstagramOutlined style={{ marginRight: 8 }} /> {userData.socialMedia.instagram}</p>
+                <p><YoutubeOutlined style={{ marginRight: 8 }} /> {userData.socialMedia.youtube}</p>
+              </div>
+              
+              <Divider />
+              
+              <Title level={4}>Estadísticas</Title>
+              <Row gutter={[16, 16]}>
+                <Col span={12}>
+                  <Statistic title="Recetas" value={userData.stats.recipes} prefix={<BookOutlined style={{ color: '#52c41a' }} />} />
+                </Col>
+                <Col span={12}>
+                  <Statistic title="Likes" value={userData.stats.likes} prefix={<HeartOutlined style={{ color: '#52c41a' }} />} />
+                </Col>
+              </Row>
+            </Card>
+          </Col>
+          
+          {/* Columna derecha - Pestañas con información adicional */}
+          <Col xs={24} md={16}>
+            <Card loading={loading} bordered={false} style={{ borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.09)' }}>
+              <Tabs defaultActiveKey="gallery">
+                <TabPane tab="Galería" key="gallery">
+                  <Row gutter={[16, 16]}>
+                    {loading ? (
+                      <Col span={24}>
+                        <Title level={4}>Cargando recetas...</Title>
+                      </Col>
+                    ) : recipes.length === 0 ? (
+                      <Col span={24}>
+                        <Title level={4}>No hay recetas disponibles</Title>
+                      </Col>
+                    ) : (
+                      recipes.map((recipe) => (
+                        <Col xs={24} sm={12} md={8} key={recipe.id}>
+                          <Card
+                            hoverable
+                            cover={<img alt={recipe.title} src={recipe.image || 'https://via.placeholder.com/300'} />}
+                            style={{ borderRadius: '8px' }}
+                          >
+                            <Card.Meta
+                              title={recipe.title}
+                              description={
+                                <div>
+                                  <div style={{ marginBottom: 8 }}>
+                                    {recipe.tags && recipe.tags.map((tag, index) => (
+                                      <Tag color="green" key={index}>{tag}</Tag>
+                                    ))}
+                                  </div>
+                                  <div>
+                                    <HeartOutlined style={{ color: '#f5222d', marginRight: 4 }} />
+                                    {recipe.likes || 0}
+                                  </div>
+                                </div>
+                              }
+                            />
+                          </Card>
+                        </Col>
+                      ))
+                    )}
+                  </Row>
+                </TabPane>
+                
+                <TabPane tab="Contacto" key="contact">
+                  <Row gutter={[24, 24]}>
+                    <Col xs={24}>
+                      <Card bordered={false} style={{ borderRadius: '8px' }}>
+                        {/* Aquí permanece la sección de contacto */}
+                      </Card>
+                    </Col>
+                  </Row>
+                </TabPane>
+              </Tabs>
+            </Card>
+          </Col>
+        </Row>
+      </Content>
+    </Layout>
+  );
+};
+
+export default Profile;
+
+
+

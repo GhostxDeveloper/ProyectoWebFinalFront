@@ -1,0 +1,141 @@
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { TextField, Button, Box, Typography, Avatar, Link, Snackbar, Alert } from '@mui/material';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { loginUser } from '../../services/userService';
+
+const Login = () => {
+  const [formData, setFormData] = useState({
+    correo_electronico: '',
+    contrasena: '',
+  });
+
+  const [openAlert, setOpenAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertSeverity, setAlertSeverity] = useState('success'); // 'error', 'warning', or 'info'
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate('/home');
+    }
+  }, [navigate]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await loginUser(formData);
+      console.log('Respuesta del servidor:', data);
+
+      if (data.token) {
+        console.log('Token generado:', data.token);
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+        setAlertMessage('Inicio de sesión exitoso');
+        setAlertSeverity('success');
+        setOpenAlert(true);
+        navigate('/home');
+      } else {
+        setAlertMessage('No se encontraron los datos del usuario');
+        setAlertSeverity('error');
+        setOpenAlert(true);
+      }
+    } catch (error) {
+      console.error('Error al iniciar sesión:', error);
+      setAlertMessage('Error al conectar con el servidor');
+      setAlertSeverity('error');
+      setOpenAlert(true);
+    }
+  };
+
+  const handleCloseAlert = () => {
+    setOpenAlert(false);
+  };
+
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        padding: 2,
+      }}
+    >
+      <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+        <LockOutlinedIcon />
+      </Avatar>
+      <Typography component="h1" variant="h5">
+        Iniciar Sesión
+      </Typography>
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        noValidate
+        sx={{ mt: 1, width: '100%', maxWidth: 360 }}
+      >
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="correo_electronico"
+          label="Correo Electrónico"
+          name="correo_electronico"
+          autoComplete="email"
+          value={formData.correo_electronico}
+          onChange={handleChange}
+        />
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          name="contrasena"
+          label="Contraseña"
+          type="password"
+          id="contrasena"
+          autoComplete="current-password"
+          value={formData.contrasena}
+          onChange={handleChange}
+        />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+        >
+          Ingresar
+        </Button>
+        <Typography align="center">
+          ¿No tienes cuenta?{' '}
+          <Link href="/Registro" variant="body2">
+            Crear Cuenta
+          </Link>
+        </Typography>
+      </Box>
+
+      <Snackbar
+        open={openAlert}
+        autoHideDuration={6000}
+        onClose={handleCloseAlert}
+      >
+        <Alert
+          onClose={handleCloseAlert}
+          severity={alertSeverity}
+          sx={{ width: '100%' }}
+        >
+          {alertMessage}
+        </Alert>
+      </Snackbar>
+    </Box>
+  );
+};
+
+export default Login;

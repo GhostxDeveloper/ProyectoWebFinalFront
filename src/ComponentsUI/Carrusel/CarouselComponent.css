@@ -1,0 +1,22 @@
+
+.carousel-slide {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 300px;
+    background-color:#f0e7de;
+
+
+}   
+.carousel-image {
+    width: 100%; /* La imagen ocupa todo el ancho del contenedor */
+    height: 100%; /* La imagen ocupa toda la altura disponible */
+    object-fit: contain; /* Mantiene las proporciones sin distorsionar */
+    max-width: none; /* Desactiva el límite de ancho */
+    max-height: none; /* Desactiva el límite de altura */
+    display: block; /* Hace que la imagen se comporte como un bloque */
+    margin-left: auto; /* Centra la imagen */
+    margin-right: auto; /* Centra la imagen */
+    border-radius: 10px; /* Redondea los bordes */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Añade una sombra sutil */
+}
