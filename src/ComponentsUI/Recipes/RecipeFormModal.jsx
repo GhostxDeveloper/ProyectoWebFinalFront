@@ -12,7 +12,8 @@ const RecipeFormModal = ({
   form, 
   editingRecipe, 
   fileList, 
-  onUploadChange 
+  onUploadChange ,
+  submitting
 }) => {
   return (
     <Modal
@@ -149,9 +150,9 @@ const RecipeFormModal = ({
             <Button onClick={onCancel}>
               Cancelar
             </Button>
-            <Button type="primary" htmlType="submit">
-              {editingRecipe ? "Actualizar" : "Agregar"}
-            </Button>
+            <Button type="primary" htmlType="submit" loading={submitting}>
+  {editingRecipe ? "Actualizar" : "Agregar"}
+</Button>
           </Space>
         </Form.Item>
       </Form>

@@ -6,6 +6,7 @@ import AppRoutes from './Routes/routes';
 import './styles/variables.css';
 import { SessionProvider } from './context/SessionContext';
 import InactivityHandler from './ComponentsUI/InactivityHandler/InactivityHandler';
+import 'antd/dist/reset.css';
 
 function App() {
   return (

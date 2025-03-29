@@ -5,6 +5,13 @@ export const getRecipes = async (userId) => {
   return response.data;
 };
 
+
+// Nuevo método para obtener todas las recetas
+export const getAllRecipes = async () => {
+  const response = await api.get('/recipes/all');
+  return response.data;
+};
+
 export const createRecipe = async (recipeData) => {
   const response = await api.post('/recipes/agregar', recipeData);
   return response.data;

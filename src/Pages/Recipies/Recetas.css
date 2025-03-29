@@ -1,5 +1,8 @@
 .recipes-container {
-  margin: 0 auto;;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Asegura que el contenedor ocupe toda la altura de la pantalla */
+  margin: 0 auto;
 }
 
 .recipes-header {
@@ -10,6 +13,9 @@
 }
 
 .recipes-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajusta el número de columnas automáticamente */
+  gap: 10px; /* Reduce el espacio entre las tarjetas */
   margin-bottom: 80px; /* Espacio para el botón flotante */
 }
 
@@ -228,10 +234,72 @@
   position: fixed;
   bottom: 24px;
   right: 24px;
-  width: 56px;
-  height: 56px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #71b156 0%, #4CAF50 100%);
+  color: white;
+  border-radius: 50%;
+  box-shadow: 
+    0 12px 20px rgba(113, 177, 86, 0.3), 
+    0 8px 16px rgba(0, 0, 0, 0.12),
+    0 4px 8px rgba(0, 0, 0, 0.08);
   z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease-in-out;
+  transform: scale(1);
+}
+
+.floating-button:hover {
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  box-shadow: 
+    0 16px 24px rgba(113, 177, 86, 0.4), 
+    0 12px 20px rgba(0, 0, 0, 0.16),
+    0 8px 12px rgba(0, 0, 0, 0.12);
+  transform: scale(1.05) rotate(3deg);
+}
+
+.floating-button:active {
+  transform: scale(0.95);
+  box-shadow: 
+    0 8px 12px rgba(113, 177, 86, 0.3), 
+    0 6px 10px rgba(0, 0, 0, 0.12),
+    0 4px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Optional: Add a subtle pulse animation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.floating-button::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: rgba(113, 177, 86, 0.2);
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.floating-button:hover::before {
+  animation: pulse 1.5s infinite;
+  opacity: 1;
 }
 
 .modal-title {

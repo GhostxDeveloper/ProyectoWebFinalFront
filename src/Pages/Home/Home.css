@@ -7,9 +7,122 @@
     border: #000000;
 }
 
-.home-container {
-    min-height: 100%; /* Esto asegura que el contenedor tenga al menos el 100% de la altura de la ventana */
-    overflow-y: auto;
-    background-color: #ffffff;
+
+  /* Additional styles for the Home component to display recipe cards */
+.recipes-container {
+    padding: 0 20px 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
   }
   
+  .recipes-grid {
+    margin-top: 20px;
+  }
+  
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+  
+/* Recipe Card Styles */
+.recipe-card-modern {
+  transition: all 0.3s ease;
+  height: 300px; /* Altura fija para todas las tarjetas */
+  width: 300px; /* Ancho ajustado para hacer las tarjetas más anchas */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Asegura que el contenido interno esté distribuido */
+  box-sizing: border-box; /* Incluye padding y border en el tamaño total */
+  overflow: hidden; /* Evita que el contenido desborde */
+  margin: 20px; /* Añade un poco de espacio entre las tarjetas */
+}
+
+.recipe-card-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 10px; /* Añade un poco de espacio interno */
+  justify-content: space-between; /* Distribuye el contenido */
+  overflow: hidden; /* Evita que el contenido desborde */
+}
+
+.recipe-description {
+  margin-bottom: 12px !important;
+  flex-grow: 1;
+  font-size: 14px; /* Ajusta el tamaño del texto */
+  text-align: center; /* Centra la descripción */
+  overflow: hidden; /* Oculta el contenido que exceda el tamaño */
+  text-overflow: ellipsis; /* Agrega puntos suspensivos si el texto es muy largo */
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  max-height: 40px; /* Limita la altura máxima de la descripción */
+}
+
+.recipe-title {
+  margin-bottom: 8px !important;
+  cursor: pointer;
+  font-size: 16px; /* Ajusta el tamaño del texto */
+  text-align: center; /* Centra el título */
+  overflow: hidden; /* Evita que el contenido desborde */
+  text-overflow: ellipsis; /* Agrega puntos suspensivos si el texto es muy largo */
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+  
+  .recipe-card-modern:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .recipe-image-modern {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  .recipe-image-modern img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .recipe-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .recipe-image-modern:hover img {
+    transform: scale(1.05);
+  }
+  
+  .recipe-image-modern:hover .recipe-image-overlay {
+    opacity: 1;
+  }
+  
+  .view-details-btn {
+    color: white;
+    font-size: 24px;
+  }
+  
+  
+  .recipe-time .anticon {
+    margin-right: 5px;
+  }
+  
+  .recipe-macro-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 5px;
+  }

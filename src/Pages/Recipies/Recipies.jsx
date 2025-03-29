@@ -8,6 +8,7 @@ import RecipeCard from '../../ComponentsUI/Recipes/RecipeCard';
 import RecipeDetailModal from '../../ComponentsUI/Recipes/RecipeDetailModal';
 import RecipeFormModal from '../../ComponentsUI/Recipes/RecipeFormModal';
 import { calculateCalories } from '../../ComponentsUI/Recipes/utils';
+import NavInferior from '../../ComponentsUI/Nav/NavInferior';
 
 const { Title, Text } = Typography;
 
@@ -22,6 +23,7 @@ const Recipies = () => {
   const [favorites, setFavorites] = useState({});
   const [detailModalVisible, setDetailModalVisible] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -76,6 +78,7 @@ const Recipies = () => {
   };
 
   const handleSubmit = async (values) => {
+    setSubmitting(true);
     try {
       if (!user) {
         message.error("Usuario no encontrado");
@@ -123,6 +126,8 @@ const Recipies = () => {
     } catch (error) {
       message.error("Error al guardar la receta");
       console.error("Error submitting recipe:", error);
+    }finally {
+      setSubmitting(false);
     }
   };
 
@@ -140,7 +145,7 @@ const Recipies = () => {
       macros: recipe.macros,
       preparationTime: recipe.preparationTime,
       ingredients: recipe.ingredients,
-      steps: recipe.steps,  // Cambié 'preparationSteps' a 'steps'
+      steps: recipe.steps,  
     });
     
     setFileList([
@@ -189,7 +194,9 @@ const Recipies = () => {
     if (loading) {
       return (
         <div className="loading-container">
-          <Spin size="large" tip="Cargando recetas..." />
+          <Spin size="large" tip="Cargando recetas...">
+            <div style={{ height: '200px' }} /> {/* Contenedor para el spinner */}
+          </Spin>
         </div>
       );
     }
@@ -208,20 +215,20 @@ const Recipies = () => {
     }
 
     return (
-      <Row gutter={[24, 24]}>
-        {recipes.map((recipe) => (
-          <Col xs={24} sm={12} md={8} key={recipe.id}>
-            <RecipeCard 
-              recipe={recipe}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-              onViewDetails={showRecipeDetail}
-              calculateCalories={calculateCalories}
-              favorites={favorites}
-            />
-          </Col>
-        ))}
-      </Row>
+<Row gutter={[8, 8]}>
+  {recipes.map((recipe) => (
+    <Col xs={24} sm={12} md={8} key={recipe.id}>
+      <RecipeCard 
+        recipe={recipe}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+        onViewDetails={showRecipeDetail}
+        calculateCalories={calculateCalories}
+        favorites={favorites}
+      />
+    </Col>
+  ))}
+</Row>
     );
   };
 
@@ -266,9 +273,11 @@ const Recipies = () => {
           editingRecipe={editingRecipe}
           fileList={fileList}
           onUploadChange={handleUploadChange}
+          submitting={submitting} 
         />
-      </div>
-    </>
+    </div>
+    <NavInferior /> {/* Asegura que NavInferior esté al final de la pantalla */}
+  </>
   );
 };
 

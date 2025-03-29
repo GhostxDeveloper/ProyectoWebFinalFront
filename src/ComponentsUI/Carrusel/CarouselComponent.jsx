@@ -6,14 +6,34 @@ import "./CarouselComponent.css";
 import image1 from "../../assets/image.png";
 import image3 from "../../assets/image1.png";
 import image2 from "../../assets/image2.png";
+
 const CarouselComponent = () => {
-  const images = [image1, image2, image3]; // Usamos las imágenes importadas
+  const images = [
+    { src: image1, title: "Imagen 1" },
+    { src: image2, title: "Imagen 2" },
+    { src: image3, title: "Imagen 3" }
+  ];
+
+  const carouselSettings = {
+    autoplay: true,
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    pauseOnHover: true,
+    adaptiveHeight: false
+  };
 
   return (
-    <Carousel autoplay>
-      {images.map((src, index) => (
+    <Carousel {...carouselSettings}>
+      {images.map((image, index) => (
         <div key={index} className="carousel-slide">
-          <img src={src} alt={`Slide ${index + 1}`} className="carousel-image" />
+          <img 
+            src={image.src} 
+            alt={image.title} 
+            className="carousel-image" 
+          />
         </div>
       ))}
     </Carousel>
